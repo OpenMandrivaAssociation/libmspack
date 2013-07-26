@@ -3,7 +3,7 @@ Version:        0.4
 Release:        0.1.alpha%{?dist}
 Summary:        Library for CAB and related files compression and decompression
 
-Group:          System Environment/Libraries
+Group:          System/Libraries
 License:        LGPLv2
 URL:            http://www.cabextract.org.uk/libmspack/
 Source0:        http://www.cabextract.org.uk/libmspack/%{name}-%{version}alpha.tar.gz
@@ -17,7 +17,7 @@ some loosely related file formats used by Microsoft.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
+Group:          System/Libraries
 Requires:       %{name} = %{version}-%{release}
 Obsoletes:      %{name}-doc < 0.2
 
@@ -28,18 +28,18 @@ for developing applications that use %{name}.
 
 %prep
 %setup -q -n %{name}-%{version}alpha
-%patch0 -p1
+%apply_patches
 
 chmod a-x mspack/mspack.h
 
 
 %build
-%configure --disable-static --disable-silent-rules
-make %{?_smp_mflags}
+%configure2_5x --disable-static --disable-silent-rules
+%make
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL='install -p'
+%makeinstall_std
 rm $RPM_BUILD_ROOT%{_libdir}/libmspack.la
 
 iconv -f ISO_8859-1 -t utf8 ChangeLog --output Changelog.utf8
@@ -53,11 +53,6 @@ rm -f html/installdox
 popd
 
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-
 %files
 %doc README TODO COPYING.LIB ChangeLog AUTHORS
 %{_libdir}/*.so.*
@@ -68,52 +63,3 @@ popd
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
 
-
-%changelog
-* Tue May 28 2013 Dan Horák <dan[at]danny.cz> - 0.4-0.1.alpha
-- updated to 0.4alpha
-
-* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3-0.4.alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
-
-* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3-0.3.alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
-
-* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3-0.2.alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
-
-* Mon May 16 2011 Dan Horák <dan[at]danny.cz> - 0.3-0.1.alpha
-- updated to 0.3alpha
-
-* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2-0.2.20100723alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
-
-* Mon Aug 30 2010 Dan Horák <dan[at]danny.cz> - 0.2-0.1.20100723alpha
-- updated to 0.2alpha released 2010/07/23
-- merged the doc subpackage with devel
-
-* Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.0-0.7.20060920alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
-
-* Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.0-0.6.20060920alpha
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
-
-* Wed Feb 13 2008 Marc Wiriadisastra <marc@mwiriadi.id.au> - 0.0-0.5-20060920alpha
-- Rebuild for gcc4.3
-
-* Sun Jan 20 2008 Marc Wiriadisastra <marc@mwiriadi.id.au> - 0.0-0.4.20060920alpha
-- installed documentation into html subdir
-- manually installed doc's for main package
-
-* Sun Jan 20 2008 Marc Wiriadisastra <marc@mwiriadi.id.au> - 0.0-0.3.20060920alpha
-- Got source using wget -N
-- Removed some doc's
-- Shifted doc line for doc package
-- Added install -p
-
-* Sun Jan 20 2008 Marc Wiriadisastra <marc@mwiriadi.id.au> - 0.0-0.2.20060920alpha
-- Changed install script for doc package
-- Fixed rpmlint issue with debug package
-
-* Fri Jan 18 2008 Marc Wiriadisastra <marc@mwiriadi.id.au> - 20060920cvs.a-1
-- Initial release
