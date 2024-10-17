@@ -8,7 +8,7 @@ Version:	0.5
 Release:	0.2.alpha
 Group:		System/Libraries
 License:	LGPLv2
-URL:		http://www.cabextract.org.uk/libmspack/
+URL:		https://www.cabextract.org.uk/libmspack/
 Source0:	http://www.cabextract.org.uk/libmspack/%{name}-%{version}alpha.tar.gz
 Patch0:		%{name}-0.4alpha-doc.patch
 BuildRequires:	doxygen
