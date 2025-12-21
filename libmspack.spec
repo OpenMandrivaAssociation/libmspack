@@ -11,6 +11,11 @@ License:	LGPLv2
 URL:		https://www.cabextract.org.uk/libmspack/
 Source0:	http://www.cabextract.org.uk/libmspack/%{name}-%{version}alpha.tar.gz
 Patch0:		%{name}-0.4alpha-doc.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 
 %description
