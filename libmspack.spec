@@ -4,8 +4,8 @@
 
 Summary:	Library for CAB and related files compression and decompression
 Name:		libmspack
-Version:	0.5
-Release:	0.2.alpha
+Version:	0.11
+Release:	1.alpha
 Group:		System/Libraries
 License:	LGPLv2
 URL:		https://www.cabextract.org.uk/libmspack/
@@ -42,8 +42,8 @@ applications that use %{name}.
 
 %prep
 
-%setup -q -n %{name}-%{version}alpha
-%patch0 -p1
+%setup -q -n libmspack-%{version}alpha
+%patch -P0 -p1
 
 chmod a-x mspack/mspack.h
 
