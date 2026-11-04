@@ -5,7 +5,7 @@
 Summary:	Library for CAB and related files compression and decompression
 Name:		libmspack
 Version:	0.11
-Release:	1.alpha
+Release:	2.alpha
 Group:		System/Libraries
 License:	LGPLv2
 URL:		https://www.cabextract.org.uk/libmspack/
@@ -79,10 +79,3 @@ rm %{buildroot}%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
-
-
-%changelog
-* Fri Feb 06 2015 oden <oden> 0.5-0.1.alpha.mga5
-+ Revision: 813673
-- imported package libmspack
-
